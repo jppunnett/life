@@ -31,17 +31,33 @@ def show_gen(gen)
   end
 end
 
+# Get cell's neighbour count.
 def get_num_live_neighbours(gen, i, j)
   live_neighbours = get_neighbour_to_north(gen, i, j)
+  live_neighbours += get_neighbour_to_north_east(gen, i, j)
+
   live_neighbours += get_neighbour_to_east(gen, i, j)
+  live_neighbours += get_neighbour_to_south_east(gen, i, j)
+
   live_neighbours += get_neighbour_to_south(gen, i, j)
+  live_neighbours += get_neighbour_to_south_west(gen, i, j)
+
   live_neighbours += get_neighbour_to_west(gen, i, j)
+  live_neighbours += get_neighbour_to_north_west(gen, i, j)
 end
 
 def get_neighbour_to_north(gen, i, j)
   ii = i - 1
   return 0 if ii < 0 
   gen[ii][j]  
+end
+
+def get_neighbour_to_north_east(gen, i, j)
+  ii = i - 1
+  jj = j + 1
+  return 0 if jj >= gen.length
+  return 0 if ii < 0 
+  gen[ii][jj]  
 end
 
 def get_neighbour_to_east(gen, i, j)
@@ -56,10 +72,34 @@ def get_neighbour_to_south(gen, i, j)
   gen[ii][j]  
 end
 
+def get_neighbour_to_south_west(gen, i, j)
+  ii = i + 1
+  jj = j - 1
+  return 0 if jj < 0
+  return 0 if ii >= gen.length 
+  gen[ii][jj]  
+end
+
+def get_neighbour_to_south_east(gen, i, j)
+  ii = i + 1
+  jj = j + 1
+  return 0 if jj >= gen.length
+  return 0 if ii >= gen.length 
+  gen[ii][jj]  
+end
+
 def get_neighbour_to_west(gen, i, j)
   jj = j - 1
   return 0 if jj < 0
   gen[i][jj]
+end
+
+def get_neighbour_to_north_west(gen, i, j)
+  jj = j - 1
+  ii = i - 1
+  return 0 if ii < 0 
+  return 0 if jj < 0
+  gen[ii][jj]
 end
 
 def decide_fate(gen, i, j)
