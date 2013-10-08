@@ -134,10 +134,9 @@ end
 
 next_gen = get_seed
 show_gen(next_gen)
-puts '------seed'
 
 10.times do
   next_gen = tick(next_gen)
   show_gen(next_gen)
-  puts '------'
+  puts
 end
