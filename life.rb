@@ -1,27 +1,24 @@
 # life.rb
 # Conway's Game of Life in Ruby
 
-# def get_seed
-#   [
-#     [1,0,0,1,1,0,1],
-#     [1,1,0,1,1,0,1],
-#     [1,0,1,1,1,0,1],
-#     [1,0,0,1,1,0,1],
-#     [1,0,1,1,1,0,1],
-#     [1,0,0,1,1,0,1],
-#     [1,0,0,1,0,0,1]
-#   ]
-# end
+ALIVE_CHAR = 'X'
+
+# Uses ARGF to grab seed from a file or stdin.
+# Returns a two-dimensonal array representing the seed.
 def get_seed
-  [
-    [0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0],
-    [0,0,1,1,1,0,0],
-    [0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0]
-  ]
+  rows = []
+  ARGF.each_line do |line|
+    row = []
+    line.chomp.each_char do |c|
+      if c == ALIVE_CHAR
+        row << 1        
+      else
+        row << 0
+      end      
+    end
+    rows << row
+  end
+  rows
 end
 
 # Display a generation of cells.
